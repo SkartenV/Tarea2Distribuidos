@@ -1,0 +1,21 @@
+// python3 -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/ChatRPC.proto
+
+syntax = "proto3";
+
+package grpc;
+
+message Vacio {}
+
+message Mensaje {
+    string Nombre = 1;
+    string Receptor = 2;
+    string Texto = 3;
+    string Tiempo = 4;
+}
+
+service ChatServidor {
+    rpc ChatStream (Vacio) returns (stream Mensaje);
+    rpc EnviarMensaje (Mensaje) returns (Vacio);
+    rpc HistorialChat (Mensaje) returns (Vacio);
+    rpc ListaClientes (Mensaje) returns (Vacio);
+}
